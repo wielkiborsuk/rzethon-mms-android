@@ -38,8 +38,6 @@ public class SimulationsAdapter extends ArrayAdapter<Simulation> {
         reportNode.setText(simulation.getLastReport().getName());
         reportTime.setText(String.valueOf(simulation.getLastReport().getTime()));
 
-        Log.i("myApp", simulation.getLastReport().getName());
-//        Log.i("myApp", simulation.getPath().get());
         if (simulation.getLastReport().getName().equals(simulation.getPath().get(simulation.getPath().size()-1).getName())) {
             simulationStatus.setText("DELIVERED");
             simulationStatus.setTextColor(this.getContext().getResources().getColor(android.R.color.holo_green_light));
