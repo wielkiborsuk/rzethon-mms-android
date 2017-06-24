@@ -32,7 +32,7 @@
             android:inputType="textPersonName"
             android:text="Name"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/message_name"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -41,16 +41,16 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
+            android:inputType="text"
+            android:text="Content"
             android:ems="10"
-            android:layout_above="@+id/editText2"
+            android:layout_above="@+id/message_name"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="47dp"
             android:layout_marginStart="47dp"
             android:layout_marginBottom="80dp"
-            android:id="@+id/editText3" />
+            android:id="@+id/message_content" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:onClick="sendMessage"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -5,10 +5,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.example.user.newmms.communication.ApiServiceFactory;
+import com.example.user.newmms.model.Node;
+import com.example.user.newmms.model.Simulation;
+import com.example.user.newmms.model.Simulations;
+import com.example.user.newmms.views.SimulationsAdapter;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +44,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }); */
 
+//            List<Node> nodes = ApiServiceFactory.createService("http://10.0.2.2:3000/", "borsuk").getNodeList().execute().body().getNodes();
 
+        Log.i("myApp","go!");
+        ApiServiceFactory.createService("http://10.0.2.2:3000/", "borsuk")
+                .getSimulationList().enqueue(new Callback<Simulations>() {
+            @Override
+            public void onResponse(Call<Simulations> call, Response<Simulations> response) {
+                ArrayAdapter<Simulation> adapter = new SimulationsAdapter(getApplicationContext(), response.body().getMessages());
+                ((ListView)findViewById(R.id.sentMessages)).setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<Simulations> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     /** Called when the user clicks the Send button */
@@ -53,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+
+            startActivity(intent);
             return true;
         }
 
